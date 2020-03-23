@@ -1,0 +1,21 @@
+<h1>Edit Goal</h1>
+<div class="content">
+    <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput>
+    </mat-form-field>
+
+    <label id="scope-label">Scope</label>
+    <mat-radio-group class="radio-group" aria-labelledby="scope-label" [(ngModel)]="scope">
+        <mat-radio-button class="radio-button" *ngFor="let s of scopes" [value]="s">
+            {{s}}
+        </mat-radio-button>
+    </mat-radio-group>
+
+    <mat-form-field>
+        <mat-label>Finish by</mat-label>
+        <input matInput [matDatepicker]="finishDate">
+        <mat-datepicker-toggle matSuffix [for]="finishDate"></mat-datepicker-toggle>
+        <mat-datepicker #finishDate></mat-datepicker>
+      </mat-form-field>
+</div>
