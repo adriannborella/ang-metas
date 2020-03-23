@@ -1,0 +1,66 @@
+<div class="content">
+    <mat-form-field appearance="fill">
+        <mat-label>Goal</mat-label>
+        <input matInput>
+    </mat-form-field>
+
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Category</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-radio-group class="radio-group" aria-labelledby="category-label" [(ngModel)]="category">
+                <mat-radio-button class="category-radio-button" *ngFor="let c of categories" [value]="c">
+                    <span class="category">
+                        {{c.name}}
+                        <mat-icon aria-hidden="false" [attr.aria-label]="c.name">{{c.icon}}</mat-icon>
+                    </span>
+                </mat-radio-button>
+            </mat-radio-group>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Scope</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-radio-group class="radio-group" aria-labelledby="scope-label" [(ngModel)]="scope">
+                <mat-radio-button class="scope-radio-button" *ngFor="let s of scopes" [value]="s">
+                    <div class="scope">                    
+                        <div>{{s.name}}</div>
+                        <div class="scope-amount">{{s.amount}}</div>                                     
+                    </div>       
+                </mat-radio-button>
+            </mat-radio-group>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>State</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-radio-group class="radio-group" aria-labelledby="state-label" [(ngModel)]="state">
+                <mat-radio-button class="category-radio-button" *ngFor="let s of states" [value]="c">
+                    <span class="state">
+                        {{s.name}}
+                        <mat-icon aria-hidden="false" [attr.aria-label]="s.name">{{s.icon}}</mat-icon>
+                    </span>
+                </mat-radio-button>
+            </mat-radio-group>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-form-field>
+        <mat-label>Finish by</mat-label>
+        <input matInput [matDatepicker]="finishDate">
+        <mat-datepicker-toggle matSuffix [for]="finishDate"></mat-datepicker-toggle>
+        <mat-datepicker #finishDate></mat-datepicker>
+    </mat-form-field>
+    <!--
+        Porcentaje de Progreso
+Orden
+
+    -->
+</div>
