@@ -1,1 +1,40 @@
-<p>register works!</p>
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <!--  <span>HOME</span> -->
+        <span>
+            <mat-icon class='logo' svgIcon="logo"></mat-icon>
+        </span>
+        <span class="spacer"></span>
+        <a mat-button routerLink="/login">Login</a>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-card class="my-card content-center">
+    <mat-card-title class='text-center'>Registration</mat-card-title>
+    <mat-card-content class="">
+
+        <!-- CONTENT HERE -->
+        <form class="my-form content-center">
+            <mat-form-field class="full-width ">
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="Email " name="email ">
+            </mat-form-field>
+            <br>
+            <mat-form-field class="full-width ">
+                <mat-label>Password</mat-label>
+                <input matInput placeholder="Password " type='password' name="password ">
+            </mat-form-field>
+            <br>
+            <mat-form-field class="full-width ">
+                <mat-label>Re Password</mat-label>
+                <input matInput placeholder="Password " name="password ">
+            </mat-form-field>
+            <button class='full-width' mat-raised-button (click)="register() " color="primary">REGISTER</button>
+        </form>
+
+    </mat-card-content>
+    <mat-card-actions class="my-form">
+        <!-- REGISTER BUTTON -->
+    </mat-card-actions>
+</mat-card>
+<router-outlet></router-outlet>

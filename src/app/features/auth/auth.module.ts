@@ -5,7 +5,11 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { RegisterComponent } from './register/register.component';
 import { ForgotAccountComponent } from './forgot-account/forgot-account.component';
 
+import {MatNativeDateModule, MatDatepickerModule, MatIconModule, MatButtonModule,
+    MatCheckboxModule, MatToolbarModule, MatCardModule, MatFormFieldModule,
+    MatInputModule, MatRadioModule, MatListModule } from '@angular/material';
 
+// import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -15,7 +19,10 @@ import { ForgotAccountComponent } from './forgot-account/forgot-account.componen
   ],
   imports: [
     CommonModule,
-    AuthRoutingModule
+    AuthRoutingModule,
+    MatNativeDateModule, MatDatepickerModule, MatIconModule, MatButtonModule,
+    MatCheckboxModule, MatToolbarModule, MatCardModule, MatFormFieldModule,
+    MatInputModule, MatRadioModule, MatListModule
   ]
 })
 export class AuthModule { }
