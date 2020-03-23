@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { GoalEditComponent } from './goal-edit/goal-edit.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule } from '@angular/forms';
+import { GoalsRoutingModule } from './goals-routing.module';
 
 
 
@@ -11,7 +12,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    GoalsRoutingModule
   ]
 })
 export class GoalsModule { }

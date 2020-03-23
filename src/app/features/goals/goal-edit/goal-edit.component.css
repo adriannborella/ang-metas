@@ -9,8 +9,47 @@
 }
 
 .content {
-    margin-left: 5px;
+    margin-left: 10px;
+    margin-top: 10px;
     display: flex;
     flex-direction: column;
     max-width: 500px;
+}
+
+:host /deep/ .category-radio-button .mat-radio-label {
+    flex-flow: column-reverse;
+}
+
+:host /deep/ .scope-radio-button .mat-radio-label {
+    flex-flow: column-reverse;
+}
+
+.category {
+    display: inline-flex;
+    flex-flow: column-reverse;
+    align-items: center;
+    margin: 10px;
+    margin-left: 0px;
+}
+
+.state {
+    display: inline-flex;
+    flex-flow: column-reverse;
+    align-items: center;
+    margin: 10px;
+    margin-left: 0px;
+}
+
+.scope {
+    display: inline-flex;
+    flex-flow: column-reverse;
+    align-items: center;
+    margin: 10px;
+    margin-left: 0px;
+}
+.scope-amount {
+    font-size: 16pt;
+}
+mat-card {
+    margin-bottom: 5px;
 }

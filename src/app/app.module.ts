@@ -23,7 +23,6 @@ import { MatListModule } from '@angular/material/list';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    GoalsModule,
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
