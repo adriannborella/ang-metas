@@ -23,17 +23,14 @@ import { MatListModule } from '@angular/material/list';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-<<<<<<< HEAD
     GoalsModule,
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
-=======
+    MatListModule,
     HttpClientModule
->>>>>>> login
   ],
   providers: [],
   bootstrap: [AppComponent]

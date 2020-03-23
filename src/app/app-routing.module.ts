@@ -4,14 +4,11 @@ import { GoalEditComponent } from './features/goals/goal-edit/goal-edit.componen
 
 
 const routes: Routes = [
-<<<<<<< HEAD
   { path: 'goal-edit', component: GoalEditComponent },
-=======
   {
     path: '',
     loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule)
   }
->>>>>>> login
 ];
 
 @NgModule({
