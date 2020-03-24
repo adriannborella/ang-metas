@@ -5,8 +5,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { GoalsRoutingModule } from './goals-routing.module';
 
-
-
 @NgModule({
   declarations: [GoalEditComponent],
   imports: [
