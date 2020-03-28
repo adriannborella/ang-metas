@@ -7,10 +7,11 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule} from '@angular/material/datepicker';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 
-import { MatButtonModule, MatSliderModule } from '@angular/material';
+import { MatSliderModule } from '@angular/material';
 
 @NgModule({
   declarations: [],

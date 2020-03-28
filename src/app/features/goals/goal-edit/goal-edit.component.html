@@ -1,7 +1,7 @@
 <div class="content">
     <mat-form-field appearance="fill">
         <mat-label>Goal</mat-label>
-        <input matInput>
+        <input matInput [(ngModel)]="goal.name">
     </mat-form-field>
 
     <mat-card>
@@ -9,9 +9,9 @@
             <mat-card-title>Category</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-            <mat-radio-group class="radio-group" aria-labelledby="category-label" [(ngModel)]="category">
-                <mat-radio-button class="category-radio-button" *ngFor="let c of categories" [value]="c">
-                    <span class="category">
+            <mat-radio-group class="radio-group" aria-labelledby="category-label" [(ngModel)]="goal.category">
+                <mat-radio-button class="radio-button" *ngFor="let c of categories" [value]="c.name">
+                    <span class="icon-radio-button">
                         {{c.name}}
                         <mat-icon aria-hidden="false" [attr.aria-label]="c.name">{{c.icon}}</mat-icon>
                     </span>
@@ -25,9 +25,9 @@
             <mat-card-title>Scope</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-            <mat-radio-group class="radio-group" aria-labelledby="scope-label" [(ngModel)]="scope">
-                <mat-radio-button class="scope-radio-button" *ngFor="let s of scopes" [value]="s">
-                    <div class="scope">                    
+            <mat-radio-group class="radio-group" aria-labelledby="scope-label" [(ngModel)]="goal.scope">
+                <mat-radio-button class="radio-button" *ngFor="let s of scopes" [value]="s.name">
+                    <div class="icon-radio-button">                    
                         <div>{{s.name}}</div>
                         <div class="scope-amount">{{s.amount}}</div>                                     
                     </div>       
@@ -41,9 +41,9 @@
             <mat-card-title>State</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-            <mat-radio-group class="radio-group" aria-labelledby="state-label" [(ngModel)]="state">
-                <mat-radio-button class="category-radio-button" *ngFor="let s of states" [value]="c">
-                    <span class="state">
+            <mat-radio-group class="radio-group" aria-labelledby="state-label" [(ngModel)]="goal.state">
+                <mat-radio-button class="radio-button" *ngFor="let s of states" [value]="s.name">
+                    <span class="icon-radio-button">
                         {{s.name}}
                         <mat-icon aria-hidden="false" [attr.aria-label]="s.name">{{s.icon}}</mat-icon>
                     </span>
@@ -54,13 +54,13 @@
 
     <mat-form-field>
         <mat-label>Finish by</mat-label>
-        <input matInput [matDatepicker]="finishDate">
+        <input matInput [matDatepicker]="finishDate" [(ngModel)]="goal.finishBy">
         <mat-datepicker-toggle matSuffix [for]="finishDate"></mat-datepicker-toggle>
         <mat-datepicker #finishDate></mat-datepicker>
     </mat-form-field>
-    <!--
-        Porcentaje de Progreso
-Orden
 
-    -->
+    <div class="buttons">
+        <button mat-raised-button type="reset" (click)="clear()">Clear</button>
+        <button mat-raised-button color="primary" type="submit" (click)="save()" >Save</button>
+    </div>
 </div>

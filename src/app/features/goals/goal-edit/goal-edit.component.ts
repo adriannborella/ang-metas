@@ -5,6 +5,8 @@ import { ScopesService } from 'src/app/services/scopes.service';
 import { Scope } from 'src/app/entities/scope.entity';
 import { GoalState } from 'src/app/entities/goal-state.entity';
 import { GoalStatesService } from 'src/app/services/goal-states.service';
+import { Goal } from 'src/app/entities/goal.entity';
+import { GoalsService } from 'src/app/services/goals.service';
 
 @Component({
   selector: 'app-goal-edit',
@@ -13,22 +15,31 @@ import { GoalStatesService } from 'src/app/services/goal-states.service';
 })
 export class GoalEditComponent implements OnInit {
 
-  scope: string;
+  goal: Goal;
   scopes: Scope[];
-
-  state: string;
   states: GoalState[];
-
-  category: string;
   categories: Category[];
 
-  constructor(categoriesService: CategoriesService, scopesService: ScopesService, goalStatesService: GoalStatesService) {
+  constructor(
+    private goalsService: GoalsService,
+    categoriesService: CategoriesService,
+    scopesService: ScopesService,
+    goalStatesService: GoalStatesService) {
     this.categories = categoriesService.getAll();
     this.scopes = scopesService.getAll();
     this.states = goalStatesService.getAll();
   }
 
   ngOnInit() {
+    this.clear();
+  }
+
+  save(): void {
+    this.goalsService.add(this.goal).then(() => this.clear());
+  }
+
+  clear(): void {
+    this.goal = new Goal();
   }
 
 }
