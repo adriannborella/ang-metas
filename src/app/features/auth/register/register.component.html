@@ -1,40 +1,47 @@
-<mat-toolbar color="primary">
-    <mat-toolbar-row>
-        <!--  <span>HOME</span> -->
-        <span>
-            <mat-icon class='logo' svgIcon="logo"></mat-icon>
-        </span>
-        <span class="spacer"></span>
-        <a mat-button routerLink="/login">Login</a>
-    </mat-toolbar-row>
-</mat-toolbar>
-
 <mat-card class="my-card content-center">
     <mat-card-title class='text-center'>Registration</mat-card-title>
     <mat-card-content class="">
 
         <!-- CONTENT HERE -->
-        <form class="my-form content-center">
+        <form class="my-form content-center" [formGroup]="registerForm" (ngSubmit)='register()'>
+            <mat-form-field class="full-width ">
+                <mat-label>Fullname</mat-label>
+                <input matInput placeholder="Ex. Juan Perez" formControlName='fullname' name="name">
+                <mat-error *ngIf="registerForm.get('fullname').hasError('required')">
+                    Fullname is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <br>
             <mat-form-field class="full-width ">
                 <mat-label>Email</mat-label>
-                <input matInput placeholder="Email " name="email ">
+                <input matInput placeholder="Ex. user@example.com" formControlName='email'>
+                <mat-error *ngIf="registerForm.get('email').hasError('email') && !registerForm.get('email').hasError('required')">
+                    Please enter a valid email address
+                </mat-error>
+                <mat-error *ngIf="registerForm.get('email').hasError('required')">
+                    Email is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="full-width ">
+                <mat-label>Password</mat-label>
+                <input matInput placeholder="Ex. A123Jjnk90O" formControlName='password' type='password' minlength="6">
+                <mat-error *ngIf="registerForm.get('password').hasError('required')">
+                    Password is <strong>required</strong>
+                </mat-error>
             </mat-form-field>
             <br>
             <mat-form-field class="full-width ">
                 <mat-label>Re Password</mat-label>
-                <input matInput placeholder="Password " name="password ">
+                <input matInput placeholder="Repeat your password" formControlName='repassword' type='password' minlength="6">
+                <mat-error *ngIf="registerForm.get('repassword').hasError('required')">
+                    Repassword is <strong>required</strong>
+                </mat-error>
             </mat-form-field>
+            
             <br>
-            <mat-form-field class="full-width ">
-                <mat-label>Re Password</mat-label>
-                <input matInput placeholder="Password " name="password ">
-            </mat-form-field>
-            <button class='full-width' mat-raised-button (click)="register() " color="primary">REGISTER</button>
+            <button class='full-width' mat-raised-button color="primary">REGISTER</button>
         </form>
-
+        <button mat-button color="accent" (click)='goToLogin()'>¿Do you have a accout? Log in please</button>
     </mat-card-content>
-    <mat-card-actions class="my-form">
-        <!-- REGISTER BUTTON -->
-    </mat-card-actions>
 </mat-card>
-<router-outlet></router-outlet>

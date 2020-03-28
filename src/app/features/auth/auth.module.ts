@@ -7,18 +7,22 @@ import { ForgotAccountComponent } from './forgot-account/forgot-account.componen
 
 import { SharedModule } from '../../shared/shared.module';
 import { AngControlsModule } from 'ang-controls';
+import { AuthHomeComponent } from './auth-home/auth-home.component';
+import { AuthNavComponent } from './auth-nav/auth-nav.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
     RegisterComponent,
-    ForgotAccountComponent
+    ForgotAccountComponent,
+    AuthHomeComponent,
+    AuthNavComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
-    AuthRoutingModule,
-    AngControlsModule    
+    AngControlsModule,
+    AuthRoutingModule
   ]
 })
 export class AuthModule { }

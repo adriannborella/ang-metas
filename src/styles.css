@@ -15,8 +15,12 @@ body {
 }
 
 .content-center {
-    display: flex!important;
+    display: -webkit-box!important;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+body {
+    background-color: rgb(66, 66, 66);
 }

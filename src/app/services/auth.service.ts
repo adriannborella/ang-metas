@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators';
 import { UserEntity } from '../entities/user.entity';
 
 import { environment } from '../../environments/environment';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class AuthService {
   userToken: string;
   loading: boolean;
 
-  constructor(private http: HttpClient, public afAuth: AngularFireAuth) {
+  constructor(private http: HttpClient, public afAuth: AngularFireAuth, private router: Router) {
     this.loading = true;
     this.readToken();
 
@@ -32,6 +33,8 @@ export class AuthService {
   }
 
   isLoged() {
+    console.log(this.userToken);
+
     return this.userToken.length > 2;
   }
 
@@ -43,6 +46,7 @@ export class AuthService {
   readToken() {
     if (localStorage.getItem('token')) {
       this.userToken = localStorage.getItem('token');
+      this.router.navigateByUrl('/goals');
     } else {
       this.userToken = '';
     }
@@ -65,13 +69,10 @@ export class AuthService {
     this.afAuth.auth.signInWithRedirect(provider);
   }
 
-  logOut() {
-    firebase.auth().signOut().then(() => {
-      localStorage.setItem('token', '');
-    },
-    (err) => {
-      console.log(err);
-    });
+  async logOut() {
+    await firebase.auth().signOut();
+    localStorage.setItem('token', '');
+    this.readToken();
   }
 
   private postFirebase(user: UserEntity, method: string) {

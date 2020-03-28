@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GoalEditComponent } from './goal-edit/goal-edit.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { FormsModule } from '@angular/forms';
 import { GoalsRoutingModule } from './goals-routing.module';
+import { GoalsHomeComponent } from './goals-home/goals-home.component';
+import { GoalsNavComponent } from './goals-nav/goals-nav.component';
 
 @NgModule({
-  declarations: [GoalEditComponent],
+  declarations: [GoalEditComponent, GoalsHomeComponent, GoalsNavComponent],
   imports: [
     CommonModule,
-    FormsModule,
     SharedModule,
     GoalsRoutingModule
   ]
