@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  login() {
+  async login() {
     if (this.loginForm.status === 'INVALID') { return; }
 
     Swal.fire({
@@ -34,20 +34,23 @@ export class LoginComponent implements OnInit {
 
     Swal.showLoading();
 
-    this.auth.mailLogin(this.loginForm.value).subscribe(
-      (resp) => {
-        Swal.close();
-        this.router.navigateByUrl('/goals');
-      },
-      (err) => {
-        Swal.fire({
-          allowOutsideClick: false,
-          text: err.error.error.message,
-          icon: 'error',
-          title: 'Error in the user login'
-        });
-        console.log('Error:', err.error.error.message);
+    try {
+      await this.auth.mailLogin(this.loginForm.value);
+      Swal.close();
+      this.router.navigateByUrl('/goals');
+    } catch (error) {
+      Swal.fire({
+        allowOutsideClick: false,
+        text: error.message,
+        icon: 'error',
+        title: 'Error in the user login'
       });
+      return error;
+    }
+  }
+
+  registerGoogle() {
+    this.auth.googleLogin();
   }
 
   goToRegister() {

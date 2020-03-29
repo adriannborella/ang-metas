@@ -38,10 +38,18 @@
                     Repassword is <strong>required</strong>
                 </mat-error>
             </mat-form-field>
-            
+
             <br>
             <button class='full-width' mat-raised-button color="primary">REGISTER</button>
         </form>
         <button mat-button color="accent" (click)='goToLogin()'>¿Do you have a accout? Log in please</button>
+    </mat-card-content>
+    <mat-card-header class='text-center' style="margin: 20px;">
+        OR
+    </mat-card-header>
+    <mat-card-content>
+        <button mat-raised-button color='primary' (click)="registerGoogle()">
+            <mat-label>Continue with Google</mat-label>
+        </button>
     </mat-card-content>
 </mat-card>

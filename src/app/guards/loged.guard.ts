@@ -10,12 +10,13 @@ export class LogedGuard implements CanActivate {
   constructor(private auth: AuthService, private router: Router) {
   }
 
-  canActivate(
+  async canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): boolean {
-    console.log("Loged Guard", this.auth.isLoged());
+    state: RouterStateSnapshot): Promise<boolean> {
+    const isloged = await this.auth.isLoged();
+    console.log('Loged Guard', isloged);
       
-    if (this.auth.isLoged()) {
+    if (isloged) {
       this.router.navigateByUrl('/goals');
       return false;
     } else {

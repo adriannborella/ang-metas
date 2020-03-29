@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
     this.router.navigateByUrl('/login');
   }
 
-  register() {
+  async register() {
     if (this.registerForm.status === 'INVALID') { return; }
 
     Swal.fire({
@@ -55,36 +55,22 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    this.auth.mailRegister(this.registerForm.value).subscribe(
-      (resp) => {
-        Swal.close();
-        this.router.navigateByUrl('/goals');
-      },
-      (err) => {
-        Swal.fire({
-          allowOutsideClick: false,
-          text: this.get_message_error(err),
-          icon: 'error',
-          title: 'Register user'
-        });
-      }
-    );
+    try {
+      await this.auth.mailRegister(this.registerForm.value)
+      Swal.close();
+      this.router.navigateByUrl('/goals');
+    } catch (error) {
+      Swal.fire({
+        allowOutsideClick: false,
+        text: error.message,
+        icon: 'error',
+        title: 'Register user'
+      });
+    }
   }
 
-  get_message_error(err): string {
-    const message = err.error.error.message;
-    let result = message;
-
-    switch (message) {
-      case 'EMAIL_EXISTS':
-        result = 'The mail has been used. If it is your mail Log in please';
-        break;
-
-      default:
-        break;
-    }
-
-    return result;
+  registerGoogle() {
+    this.auth.googleLogin();
   }
 
   validate_passwords(): boolean {

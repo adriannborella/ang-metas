@@ -2,64 +2,55 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { AngularFireAuth } from '@angular/fire/auth';
+
 import * as firebase from 'firebase/app';
-
-import { map } from 'rxjs/operators';
 import { UserEntity } from '../entities/user.entity';
-
-import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  user: firebase.User;
   userToken: string;
-  loading: boolean;
+  init: Observable<boolean>;
 
   constructor(private http: HttpClient, public afAuth: AngularFireAuth, private router: Router) {
-    this.loading = true;
-    this.readToken();
-
+    this.user = null;
     this.afAuth.authState.subscribe(user => {
-      this.loading = false;
+      this.user = user;
 
       if (user) {
-        user.getIdToken().then(token => {
-          this.saveToken(token);
-        });
+        this.router.navigateByUrl('/goals');
+      } else {
+        this.router.navigateByUrl('/auth');
       }
+    });
+
+    this.afAuth.idToken.subscribe(token => {
+      this.userToken = token;
     });
   }
 
-  isLoged() {
-    console.log(this.userToken);
+  async isLoged() {
+    let token = null;
 
-    return this.userToken.length > 2;
-  }
-
-  saveToken(idToken: string) {
-    this.userToken = idToken;
-    localStorage.setItem('token', idToken);
-  }
-
-  readToken() {
-    if (localStorage.getItem('token')) {
-      this.userToken = localStorage.getItem('token');
-      this.router.navigateByUrl('/goals');
-    } else {
-      this.userToken = '';
+    if (this.user !== null) {
+      token = await this.user.getIdToken();
     }
 
-    return this.userToken;
+    return token !== null;
   }
 
-  mailRegister(user: UserEntity) {
-    return this.postFirebase(user, 'signUp');
+  async mailRegister(user: UserEntity) {
+    const result = await this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password);
+    return result;
   }
 
-  mailLogin(user: UserEntity){
-    return this.postFirebase(user, 'signInWithPassword');
+  async mailLogin(user: UserEntity) {
+    const result = await this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password);
+    return result;
   }
 
   googleLogin() {
@@ -71,23 +62,6 @@ export class AuthService {
 
   async logOut() {
     await firebase.auth().signOut();
-    localStorage.setItem('token', '');
-    this.readToken();
-  }
-
-  private postFirebase(user: UserEntity, method: string) {
-    const authData = {
-      ...user,
-      returnSecureToken: true
-    };
-
-    const url = 'https://identitytoolkit.googleapis.com/v1/accounts:' + method + '?key=' + environment.firebase.apiKey;
-
-    return this.http.post(url, authData).pipe(
-      map(resp => {
-        this.saveToken(resp['idToken']);
-        return resp;
-      })
-    );
   }
 }
+
